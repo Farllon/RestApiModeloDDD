@@ -25,7 +25,10 @@ namespace RestApiModeloDDD.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<StoreContext>(options =>
-                options.UseSqlServer(Configuration["SqlConnection:SqlConnectionString"])
+                options.UseSqlServer(
+                    Configuration["SqlConnection:SqlConnectionString"],
+                    b => b.MigrationsAssembly("RestApiModeloDDD.API")
+                )
             );
             services.AddControllers();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
